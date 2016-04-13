@@ -24,7 +24,7 @@ install: # Install the app host
 - git clone --recursive $APPS_HOST_REPO$APPS_HOST_NAME\.git # clone the extension or web server
 - cd $APPS_HOST_NAME; git checkout $APPS_HOST_BRANCH
 - cd $PRIVLY_APPS_PATH; git remote set-url origin $APPS_REPO; git fetch; git checkout $APPS_BRANCH
-- pip install -r requirements.txt
+- pip install --user -r requirements.txt
 - python build --platform=$HTML_BUILD_PLATFORM
 - cd ~
 before_script:
