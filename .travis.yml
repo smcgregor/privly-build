@@ -30,7 +30,8 @@ install: # Install the app host
 - python build.py --platform=$HTML_BUILD_PLATFORM
 - cd $TRAVIS_BUILD_DIR
 before_script:
-- cd privly-web
+- "if [ ${APPS_HOST_NAME} = 'privly-jetpack' ]; then cd $TRAVIS_BUILD_DIR && npm install jpm -g && cd privly-jetpack/node && npm install; fi" # Install special Jetpack dependencies
+- cd $TRAVIS_BUILD_DIR; cd privly-web
 - cp config/database.travis.yml config/database.yml
 - mysql -e 'create database privly_test'
 - bundle install #Installs the required gems
