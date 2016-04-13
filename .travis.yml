@@ -37,7 +37,7 @@ before_script:
 - rake db:schema:load #Loads the Scheme
 - rake db:seed #Seeds the DB
 - "bundle exec rails server -p 3000 &"
-- cd $TRAVIS_BUILD_DIR;cd $APPS_HOST_NAME/$TESTING_PATH
+- cd $TRAVIS_BUILD_DIR;cd $APPS_HOST_NAME/$PRIVLY_APPS_PATH/test
 - bundle install #Installs gems required for selenium testing
 - cd selenium
 script:
