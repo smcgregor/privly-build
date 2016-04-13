@@ -1,4 +1,4 @@
-language: ruby
+language: ruby # todo: checkout the selected branch and run the build system on the apps, also checkout the selected branch of the APPS_HOST
 rvm:
 - 2.2.4
 env:
@@ -11,15 +11,15 @@ env:
     - SERVER_REPO=https://github.com/privly/privly-web.git
     - APPS_HOST_REPO=https://github.com/privly/ # The org or user account we are testing extensions and content servers on
     - RAILS_ENV=development
-    - secure: "Gc0AJPfjEJEuuwbXuowGiGgSSpThJlQh5vxnv2jnqsnxev1XVZaKS+5wwgAyxFb9sw9aRQy/k+79FBS1ILKCqY68MCFgI8eZ4OiuJJjO46p/QZAqUO6XwxQ6Trs/TAPRP0LEooQ41wOtLW+n/bcOhaCYwZEF9av/q9eJVMvcx9Y="#SAUCE_URL="http://privly:********-****-****-****-************@ondemand.saucelabs.com:80/wd/hub"(privly/privly-chrome)
-    - secure: "U3tZAmY9VK6P2G/LXNt1upMxQ41kOdlnEgxdHB6Prp4UuTkpPv/TLqJrFPqpjEsgRZwJrz8UW+iICHyR16APXiLM3dKCgC11+Apk5DJYnypac2w6pviCbrr7y1C/7RK8gOyXGuNVJJMs6pmkZSsNtfSlmAGaCe/kgeWIcQ0ut+I="#SAUCE_USERNAME=privly(privly/privly-chrome)
+    - secure: "rtbxNtAkzJU+4pg5lz9lviJ0OKSjOD1bAyk+4scz5jGoXzgoG6PLbu3Zml/KCcqo9BfwaXct7ezaRd80ufN4N0wWQ9No6ldsMYQ9cZ26NeHU2Qc3pSmlJre1sAaAq9DWZWQqBDh2IpnhRdPPMghKT5RatufKkMD8wH+LgTzu0Xxlzq+47N+DLiafTUoUsMAvwocM2VDcZu3FqqOxN7DZZlfIyypKRXVtYiYjb5LCiwkSmrV/M4bBKVlE9JTY8/JiCE/CZaXyxdlp+YBPeIS8pJ62/d51Q1fC8ZcmL0gS5SeJ0bKNKY7gZEkKc0dLrk4eTilEBfE45o3pKXxq+YhOARg88v5zQgCuFwCcFulZ2cxuni3lQQ6kIck9o8KM8/aaLehW9ninjV4Y4lNHSjv/gMXTByeAlPX/J8NuYoUEvH6/b25aeHGepBNDydzVulhAkxl7Br15NePdgEBk162idHghq/bbGCLGx4k7XTVdtZP2FNKQ6GBweGR6kSu6lMle+p/mJzTEYgd28S8Toaz8hU2H88N0WB7g8NBrvwlLG231bcWL4OBPuHtIT9NkggLd0AuI+mJcK9FmxH6/kVR6ViuaDkRISNdH2yxNflVnOlv5adyeUTY5PhGQoXnDLOINQ9GbBQ1UjvkGn0BabuTdr3hjObI0IdKDriWmHP9xxOc="#SAUCE_URL="http://smcgregor:********-****-****-****-************@ondemand.saucelabs.com:80/wd/hub"(smcgregor/privly-build)
+    - secure: "ifTD5r0X1H1RvC2ID9amnmbhEMGuydfGDh3YMC9PEWlntA5wdLEGanlmF9PxBaIs7lJQsvC3xujgeu2/MJXcAFyy3I5vT6o9YKoBi1ugVP8wAXcj0IMVJnYjVvuArVtkjxX8k9EpTrk6juIdlwlt4mbI9eFk5FitRzimA3Crv/6NzC6sEwJ+tljIPliIqmB7yLKZCZmxazHuWgQ3TTENORU4VmCxK9E9zVBfxQ3BMrSc/oHfFvINj2p+VYLVY3dAsNAr/xwyy7A0DKoz4A1JFDQkbA0JAwlOTEVxXbywY0EM0q3Ycs04BCjq90/xVrjrg/mRplYWGv6H7b8F6GQMK8dkR7Tkwclkcwzuo5YB8SKptW5ynk4ocomDzzHXRmG2fmD/xCngxb6CmqEmtKu63FKw8KJdmz/5W/T5T+jiqxi4IkiXwDA7+e+TKKCPmNDtAh1FT5mRosfxpL46Qmqq/WeaBiL1+ZCC5jH7wRqMdYjLrEurKdPBRNmUiQ5q9yykaI8V3teGrfDQpHeod0bOZFWQCPdgxIdb7d1AMseRJZGga8vXmPDzMs+OjamIgXjpRAMOXS1iAnq1DpjJswc48Su3vYUUqcTMGxtFflLP5BnD8xiT8z/81yVFCDPtefLb+wPE0BFAkqGN3xOfRhmzXnZoLQkMrLqa6tPjPaVzdrk="#SAUCE_USERNAME=smcgregor(smcgregor/privly-build)
   matrix:
     - APPS_HOST_NAME=privly-chrome APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_chrome_extension PRIVLY_APPS_PATH=privly-applications HTML_BUILD_PLATFORM=chrome
     - APPS_HOST_NAME=privly-jetpack APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_firefox_extension PRIVLY_APPS_PATH=chrome/content/privly-applications HTML_BUILD_PLATFORM=chrome
     - APPS_HOST_NAME=privly-web APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_firefox_web PRIVLY_APPS_PATH=public/apps HTML_BUILD_PLATFORM=web
     - APPS_HOST_NAME=privly-web APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_chrome_web PRIVLY_APPS_PATH=public/apps HTML_BUILD_PLATFORM=web
 before_install: # Clone the web server
-- "if [ ${APPS_HOST_NAME} != 'privly-web' ]; then git clone --recursive ${SERVER_REPO} && cd privly-web && git checkout {$SERVER_BRANCH}; fi" # clone the webserver if we are not testing it
+- "if [ ${APPS_HOST_NAME} != 'privly-web' ]; then git clone --recursive ${SERVER_REPO} && cd privly-web && git checkout $SERVER_BRANCH; fi" # clone the webserver if we are not testing it
 install: # Install the app host
 - git clone --recursive $APPS_HOST_REPO$APPS_HOST_NAME\.git # clone the extension or web server
 - cd $APPS_HOST_NAME; git checkout $APPS_HOST_BRANCH
