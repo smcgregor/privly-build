@@ -3,15 +3,43 @@ rvm:
 - 2.2.4
 env:
   global:
-    - V1=hi
+    - DB=mysql
+    - TRAVIS_LAUNCHES_SAUCE_CONNECT=true # Tell the karma file that it does not need to launch Sauce connect
+    - APPS_BRANCH=develop
+    - APPS_REPO=https://github.com/privly/privly-applications.git # todo: change the remote to this one and pull first
+    - SERVER_BRANCH=develop
+    - SERVER_REPO=https://github.com/privly/privly-web.git
+    - APPS_HOST_REPO=https://github.com/privly/ # The org or user account we are testing extensions and content servers on
+    - RAILS_ENV=development
+    - secure: "Gc0AJPfjEJEuuwbXuowGiGgSSpThJlQh5vxnv2jnqsnxev1XVZaKS+5wwgAyxFb9sw9aRQy/k+79FBS1ILKCqY68MCFgI8eZ4OiuJJjO46p/QZAqUO6XwxQ6Trs/TAPRP0LEooQ41wOtLW+n/bcOhaCYwZEF9av/q9eJVMvcx9Y="#SAUCE_URL="http://privly:********-****-****-****-************@ondemand.saucelabs.com:80/wd/hub"(privly/privly-chrome)
+    - secure: "U3tZAmY9VK6P2G/LXNt1upMxQ41kOdlnEgxdHB6Prp4UuTkpPv/TLqJrFPqpjEsgRZwJrz8UW+iICHyR16APXiLM3dKCgC11+Apk5DJYnypac2w6pviCbrr7y1C/7RK8gOyXGuNVJJMs6pmkZSsNtfSlmAGaCe/kgeWIcQ0ut+I="#SAUCE_USERNAME=privly(privly/privly-chrome)
   matrix:
-    - V2=there V3=world
-    - V2=is V3=working
-before_install:
-- echo "before_install"; echo $V1; echo $V2; echo $V3
-install:
-- echo "install"; echo $V1; echo $V2; echo $V3
+    - APPS_HOST_NAME=privly-chrome APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_chrome_extension PRIVLY_APPS_PATH=privly-applications HTML_BUILD_PLATFORM=chrome
+    - APPS_HOST_NAME=privly-jetpack APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_firefox_extension PRIVLY_APPS_PATH=chrome/content/privly-applications HTML_BUILD_PLATFORM=chrome
+    - APPS_HOST_NAME=privly-web APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_firefox_web PRIVLY_APPS_PATH=public/apps HTML_BUILD_PLATFORM=web
+    - APPS_HOST_NAME=privly-web APPS_HOST_BRANCH=develop SELENIUM_PLATFORM=sauce_chrome_web PRIVLY_APPS_PATH=public/apps HTML_BUILD_PLATFORM=web
+before_install: # Clone the web server
+- "if [ ${APPS_HOST_NAME} != 'privly-web' ]; then git clone --recursive ${SERVER_REPO} && cd privly-web && git checkout {$SERVER_BRANCH}; fi" # clone the webserver if we are not testing it
+install: # Install the app host
+- git clone --recursive $APPS_HOST_REPO$APPS_HOST_NAME\.git # clone the extension or web server
+- cd $APPS_HOST_NAME; git checkout $APPS_HOST_BRANCH
+- cd $PRIVLY_APPS_PATH; git remote set-url origin $APPS_REPO; git fetch; git checkout $APPS_BRANCH
+- pip install -r requirements.txt
+- python build --platform=$HTML_BUILD_PLATFORM
+- cd ~
 before_script:
-- echo "before_script"; echo $V1; echo $V2; echo $V3
+- cd privly-web
+- cp config/database.travis.yml config/database.yml
+- mysql -e 'create database privly_test'
+- bundle install #Installs the required gems
+- rake db:create #Creates the Database
+- rake db:schema:load #Loads the Scheme
+- rake db:seed #Seeds the DB
+- "bundle exec rails server -p 3000 &"
+- cd ..;cd $APPS_HOST_NAME/$TESTING_PATH
+- bundle install #Installs gems required for selenium testing
+- cd selenium
 script:
-- echo "script"; echo $V1; echo $V2; echo $V3
+- "ruby run_all.rb -p $SELENIUM_PLATFORM -r experimental -c http://localhost:3000"
+addons:
+  sauce_connect: true
