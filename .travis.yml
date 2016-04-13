@@ -26,7 +26,7 @@ install: # Install the app host
 - cd $PRIVLY_APPS_PATH; git remote set-url origin $APPS_REPO; git fetch; git checkout $APPS_BRANCH
 - pip install --user -r requirements.txt
 - python build.py --platform=$HTML_BUILD_PLATFORM
-- cd ~
+- cd $TRAVIS_BUILD_DIR
 before_script:
 - cd privly-web
 - cp config/database.travis.yml config/database.yml
