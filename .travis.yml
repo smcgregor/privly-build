@@ -49,6 +49,7 @@ script:
 - cd ..
 - ./run_each.sh karma.conf-ci.js # Run the unit tests
 - ./node_modules/.bin/lcov-result-merger 'coverage/*.lcov' 'coverage/combined.lcov' # Merge the coverage results
+- ls;ls coverage
 - cat ./coverage/combined.lcov | ./node_modules/coveralls/bin/coveralls.js # Send the coverage results to coveralls
 addons:
   sauce_connect: true
