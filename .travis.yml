@@ -5,11 +5,11 @@ env:
   global:
     - DB=mysql
     - TRAVIS_LAUNCHES_SAUCE_CONNECT=true # Tell the karma file that it does not need to launch Sauce connect
-    - APPS_BRANCH=develop
+    - APPS_BRANCH=fix-privly-chrome-151
     - APPS_REPO=https://github.com/privly/privly-applications.git # todo: change the remote to this one and pull first
     - SERVER_BRANCH=develop
     - SERVER_REPO=https://github.com/privly/privly-web.git
-    - APPS_HOST_REPO=https://github.com/privly/ # The org or user account we are testing extensions and content servers on
+    - APPS_HOST_REPO=https://github.com/smcgregor/ # The org or user account we are testing extensions and content servers on
     - RAILS_ENV=development
     - BROWSERS_TO_TEST=Chrome,Firefox,Safari # Used by unit tests
     - secure: "rtbxNtAkzJU+4pg5lz9lviJ0OKSjOD1bAyk+4scz5jGoXzgoG6PLbu3Zml/KCcqo9BfwaXct7ezaRd80ufN4N0wWQ9No6ldsMYQ9cZ26NeHU2Qc3pSmlJre1sAaAq9DWZWQqBDh2IpnhRdPPMghKT5RatufKkMD8wH+LgTzu0Xxlzq+47N+DLiafTUoUsMAvwocM2VDcZu3FqqOxN7DZZlfIyypKRXVtYiYjb5LCiwkSmrV/M4bBKVlE9JTY8/JiCE/CZaXyxdlp+YBPeIS8pJ62/d51Q1fC8ZcmL0gS5SeJ0bKNKY7gZEkKc0dLrk4eTilEBfE45o3pKXxq+YhOARg88v5zQgCuFwCcFulZ2cxuni3lQQ6kIck9o8KM8/aaLehW9ninjV4Y4lNHSjv/gMXTByeAlPX/J8NuYoUEvH6/b25aeHGepBNDydzVulhAkxl7Br15NePdgEBk162idHghq/bbGCLGx4k7XTVdtZP2FNKQ6GBweGR6kSu6lMle+p/mJzTEYgd28S8Toaz8hU2H88N0WB7g8NBrvwlLG231bcWL4OBPuHtIT9NkggLd0AuI+mJcK9FmxH6/kVR6ViuaDkRISNdH2yxNflVnOlv5adyeUTY5PhGQoXnDLOINQ9GbBQ1UjvkGn0BabuTdr3hjObI0IdKDriWmHP9xxOc="#SAUCE_URL="http://smcgregor:********-****-****-****-************@ondemand.saucelabs.com:80/wd/hub"(smcgregor/privly-build)
