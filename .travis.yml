@@ -6,7 +6,7 @@ env:
     - DB=mysql
     - TRAVIS_LAUNCHES_SAUCE_CONNECT=true # Tell the karma file that it does not need to launch Sauce connect
     - APPS_BRANCH=fix-privly-chrome-151
-    - APPS_REPO=https://github.com/privly/privly-applications.git # todo: change the remote to this one and pull first
+    - APPS_REPO=https://github.com/smcgregor/privly-applications.git # todo: change the remote to this one and pull first
     - SERVER_BRANCH=develop
     - SERVER_REPO=https://github.com/privly/privly-web.git
     - APPS_HOST_REPO=https://github.com/smcgregor/ # The org or user account we are testing extensions and content servers on
