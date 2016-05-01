@@ -26,7 +26,7 @@ install: # Install the app host
 - cd $TRAVIS_BUILD_DIR
 - git clone --recursive $APPS_HOST_REPO$APPS_HOST_NAME\.git # clone the extension or web server
 - cd $APPS_HOST_NAME; git checkout $APPS_HOST_BRANCH
-- cd $PRIVLY_APPS_PATH; git remote set-url origin $APPS_REPO; git pull --all; git checkout $APPS_BRANCH
+- cd $PRIVLY_APPS_PATH; git remote set-url origin $APPS_REPO; git checkout -b TestedBranch origin/$APPS_BRANCH; git pull
 - pip install --user -r requirements.txt
 - python build.py --platform=$HTML_BUILD_PLATFORM
 - cd $TRAVIS_BUILD_DIR
